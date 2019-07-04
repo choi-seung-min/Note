@@ -1,6 +1,5 @@
 package com.example.note.contract
 
-import android.view.View
 import com.example.note.repository.LoginRepository
 
 interface LoginContract{
@@ -15,7 +14,7 @@ interface LoginContract{
         fun getPassword() : String
         fun startNoteActivity()
         fun finishActivity()
-        fun hideKeyboard( v : android.view.View? )
+        fun hideKeyboard()
     }
     interface Presenter{
         fun onClickLogIn()

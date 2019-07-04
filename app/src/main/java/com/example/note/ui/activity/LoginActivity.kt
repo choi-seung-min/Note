@@ -2,11 +2,10 @@ package com.example.note.ui.activity
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import android.widget.Toast
 import com.example.note.R
 import com.example.note.contract.LoginContract
@@ -16,20 +15,15 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), LoginContract.View {
 
-
     private val loginPresenter = LoginPresenter(this, LoginRepository())
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        login.setOnClickListener{
-            loginPresenter.onClickLogIn()
-            hideKeyboard(this.currentFocus)
-        }
-        cl.setOnClickListener { hideKeyboard(this.currentFocus) }
-        line.setOnClickListener{ hideKeyboard(this.currentFocus) }
-        filter.setOnClickListener{ hideKeyboard(this.currentFocus) }
+        login.setOnClickListener{loginPresenter.onClickLogIn() }
+        cl.setOnClickListener { hideKeyboard() }
     }
 
     override fun showMessageForLoginSuccess() = Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
@@ -52,13 +46,9 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     override fun finishActivity() = finish()
 
-    override fun hideKeyboard( v : View? ) {
-        if(v != null){
-            if(v !is EditText){
-                val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(id.windowToken, 0)
-                imm.hideSoftInputFromWindow(password.windowToken, 0)
-            }
-        }
+    override fun hideKeyboard() {
+        val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(id.windowToken, 0)
+        imm.hideSoftInputFromWindow(password.windowToken, 0)
     }
 }
