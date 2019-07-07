@@ -1,6 +1,6 @@
 package com.example.note.presenter
 
-import android.view.inputmethod.InputMethodManager
+import android.content.Context
 import com.example.note.contract.LoginContract
 import com.example.note.repository.LoginRepository
 
@@ -8,7 +8,6 @@ class LoginPresenter(
     private val loginView :LoginContract.View,
     private val loginRepository : LoginContract.Repository
 ) : LoginContract.Presenter{
-
 
     override fun onClickLogIn() {
         val id = loginView.getId()
@@ -37,5 +36,7 @@ class LoginPresenter(
         })
     }
 
-    override fun onClickOther() {}
+    override fun onClickOther() {
+        //TODO: hide keyboard here
+    }
 }

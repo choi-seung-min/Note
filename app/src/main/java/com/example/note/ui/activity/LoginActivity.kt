@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     private val loginPresenter = LoginPresenter(this, LoginRepository())
-
+    //TODO: solve about focus on button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
