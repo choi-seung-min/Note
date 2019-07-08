@@ -1,6 +1,5 @@
 package com.example.note.presenter
 
-import android.content.Context
 import com.example.note.contract.LoginContract
 import com.example.note.repository.LoginRepository
 
@@ -34,9 +33,5 @@ class LoginPresenter(
             }
 
         })
-    }
-
-    override fun onClickOther() {
-        //TODO: hide keyboard here
     }
 }

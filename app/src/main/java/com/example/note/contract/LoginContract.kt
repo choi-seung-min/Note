@@ -18,7 +18,6 @@ interface LoginContract{
     }
     interface Presenter{
         fun onClickLogIn()
-        fun onClickOther()
     }
 
     interface  Repository{

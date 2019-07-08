@@ -10,7 +10,7 @@
         android:background="@drawable/note_background">
 
     <TextView
-            android:text="Note"
+            android:text="@string/note"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/note"
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:hint="ID"
+            android:hint="@string/id"
             android:ems="10"
             android:id="@+id/id"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,13 +48,15 @@
             app:layout_constraintBottom_toTopOf="@+id/password"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"
-            app:layout_constraintHorizontal_bias="0.5"/>
+            app:layout_constraintHorizontal_bias="0.5"
+            android:importantForAutofill="no"
+            tools:targetApi="O"/>
 
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:hint="Password"
+            android:hint="@string/password"
             android:ems="10"
             android:id="@+id/password"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +67,9 @@
             android:textColorHint="@android:color/white"
             app:layout_constraintHorizontal_bias="0.5"
             android:imeOptions="actionDone"
-            android:maxLines="1"/>
+            android:maxLines="1"
+            android:importantForAccessibility="no"
+            tools:targetApi="O"/>
 
     <android.support.design.button.MaterialButton
             android:layout_width="wrap_content"
@@ -76,9 +80,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:id="@+id/login"
             app:layout_constraintHorizontal_bias="0.5"
-            android:text="LogIn"
+            android:text="@string/login"
             android:backgroundTint="@android:color/darker_gray"
-            android:textColor="@android:color/black"
-            android:focusable="false"/>
+            android:textColor="@android:color/black"/>
 
 </android.support.constraint.ConstraintLayout>
