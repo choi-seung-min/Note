@@ -22,7 +22,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         setContentView(R.layout.activity_login)
 
         login.setOnClickListener{loginPresenter.onClickLogIn() }
-        login.setOnFocusChangeListener { v , hasFocus ->  if(hasFocus) hideKeyboard() }
+//        login.setOnFocusChangeListener { v , hasFocus ->  if(hasFocus) hideKeyboard() }
         cl.setOnClickListener { hideKeyboard() }
     }
 
