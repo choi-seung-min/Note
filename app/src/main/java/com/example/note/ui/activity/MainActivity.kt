@@ -8,27 +8,29 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.example.note.R
+import com.example.note.contract.MainContract
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
+class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNavigationItemSelectedListener{
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setToolbar()
-        navigationView.setNavigationItemSelectedListener(this)
+        init()
     }
 
-    private fun setToolbar(){
+    override fun init() {
         setSupportActionBar(toolbar)
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
-    }
 
+        navigationView.setNavigationItemSelectedListener(this)
+    }
 
     //setting tool bar menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
