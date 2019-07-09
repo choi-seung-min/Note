@@ -2,7 +2,7 @@ package com.example.note.contract
 
 interface MainContract{
     interface View{
-        fun setToolBar()
+        fun init()
     }
 
     interface Presenter{
