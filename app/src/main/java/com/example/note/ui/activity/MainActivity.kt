@@ -5,9 +5,11 @@ import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import com.example.note.R
+import com.example.note.Task
 import com.example.note.contract.MainContract
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -30,6 +32,10 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         supportActionBar!!.setDisplayShowTitleEnabled(false)
 
         navigationView.setNavigationItemSelectedListener(this)
+
+        var mainAdapter = MainAdapter(setData())
+        recycler_view.adapter = mainAdapter
+        recycler_view.layoutManager = LinearLayoutManager(applicationContext)
     }
 
     //setting tool bar menu
@@ -71,5 +77,33 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         } else{
             super.onBackPressed()
         }
+    }
+
+    fun setData() : MutableList<Task>{
+        val dataList : MutableList<Task> = arrayListOf()
+
+        val list1 = Task("1", "hi")
+        val list2 = Task("2", "hello")
+        val list3 = Task("3", "aloha")
+        val list4 = Task("4", "hello world")
+        val list5 = Task("5", "something")
+        val list6 = Task("6", "anything")
+        val list7 = Task("7", "nothing")
+        val list8 = Task("8", "eight")
+        val list9 = Task("9", "nine")
+        val list10 = Task("10", "finish")
+
+        dataList.add(list1)
+        dataList.add(list2)
+        dataList.add(list3)
+        dataList.add(list4)
+        dataList.add(list5)
+        dataList.add(list6)
+        dataList.add(list7)
+        dataList.add(list8)
+        dataList.add(list9)
+        dataList.add(list10)
+
+        return dataList
     }
 }

@@ -9,8 +9,10 @@
         android:fitsSystemWindows="true">
     <!-- main layout-->
     <RelativeLayout
-            android:layout_width="match_parent" android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="#fff">
+
         <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -20,11 +22,12 @@
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 />
-        <TextView
-                android:layout_width="wrap_content"
+
+        <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="test"
-                android:layout_centerInParent="true"/>
+                android:id="@+id/recycler_view"
+                android:layout_below="@id/toolbar"/>
     </RelativeLayout>
 
     <!--navigation drawer-->
