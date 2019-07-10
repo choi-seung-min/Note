@@ -31,7 +31,6 @@ class LoginPresenter(
                 loginView.showMessageForLoginFail()
                 loginView.clearInputForLoginFail()
             }
-
         })
     }
 }

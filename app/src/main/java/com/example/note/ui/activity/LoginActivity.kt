@@ -21,7 +21,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        login.setOnClickListener{loginPresenter.onClickLogIn() }
+        login.setOnClickListener { loginPresenter.onClickLogIn() }
 //        login.setOnFocusChangeListener { v , hasFocus ->  if(hasFocus) hideKeyboard() }
         cl.setOnClickListener { hideKeyboard() }
     }
@@ -30,7 +30,10 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     override fun showMessageForLoginFail() = Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
 
-    override fun clearInputForLoginFail() = id.setText("")
+    override fun clearInputForLoginFail() {
+        id.setText("")
+        password.setText("")
+    }
 
     override fun showMessageForBlankID() = Toast.makeText(this, "ID 입력란이 비어있습니다.", Toast.LENGTH_SHORT).show()
 
@@ -50,5 +53,6 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(id.windowToken, 0)
         imm.hideSoftInputFromWindow(password.windowToken, 0)
+        //TODO: use when login button clicked
     }
 }
