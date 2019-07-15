@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         }
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(recycler_view)
+        //TODO: strange after item deleted
     }
 
     //setting tool bar menu
