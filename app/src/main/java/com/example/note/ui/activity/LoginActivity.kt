@@ -15,13 +15,18 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), LoginContract.View {
 
-    private val loginPresenter = LoginPresenter(this, LoginRepository())
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        login.setOnClickListener { loginPresenter.onClickLogIn() }
+        val loginPresenter = LoginPresenter(this, LoginRepository())
+
+        login.setOnClickListener {
+            loginPresenter.onClickLogIn()
+            hideKeyboard()
+        }
 //        login.setOnFocusChangeListener { v , hasFocus ->  if(hasFocus) hideKeyboard() }
         cl.setOnClickListener { hideKeyboard() }
     }
@@ -53,6 +58,5 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(id.windowToken, 0)
         imm.hideSoftInputFromWindow(password.windowToken, 0)
-        //TODO: use when login button clicked
     }
 }

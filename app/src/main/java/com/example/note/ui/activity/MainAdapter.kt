@@ -27,6 +27,11 @@ class MainAdapter (item : MutableList<Task>) : RecyclerView.Adapter<MainAdapter.
         holder.sample2.text = sampleText.desc
     }
 
+    fun removeAt(position: Int){
+        item.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
     class SampleViewHolder(view : View) : RecyclerView.ViewHolder(view){
         var sample1 = view.findViewById<TextView>(R.id.textView)
         var sample2 = view.findViewById<TextView>(R.id.textView2)
