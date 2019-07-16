@@ -35,19 +35,18 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
 
         navigationView.setNavigationItemSelectedListener(this)
 
-        var mainAdapter = MainAdapter(setData())
+        val mainAdapter = MainAdapter(setData())
         recycler_view.adapter = mainAdapter
         recycler_view.layoutManager = LinearLayoutManager(applicationContext)
 
-        val swipeHandler = object : SwipeToDeleteCallback(this){
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, position: Int) {
-                val adapter = recycler_view.adapter as MainAdapter
-                adapter.removeAt(viewHolder.adapterPosition)
-            }
-        }
-        val itemTouchHelper = ItemTouchHelper(swipeHandler)
-        itemTouchHelper.attachToRecyclerView(recycler_view)
-        //TODO: strange after item deleted
+//        val swipeHandler = object : SwipeToDeleteCallback(this){
+//            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, position: Int) {
+//                val adapter = recycler_view.adapter as MainAdapter
+//                adapter.removeAt(viewHolder.adapterPosition)
+//            }
+//        }
+//        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+//        itemTouchHelper.attachToRecyclerView(recycler_view)
     }
 
     //setting tool bar menu

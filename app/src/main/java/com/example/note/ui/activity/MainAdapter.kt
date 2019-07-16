@@ -33,7 +33,7 @@ class MainAdapter (item : MutableList<Task>) : RecyclerView.Adapter<MainAdapter.
     }
 
     class SampleViewHolder(view : View) : RecyclerView.ViewHolder(view){
-        var sample1 = view.findViewById<TextView>(R.id.textView)
-        var sample2 = view.findViewById<TextView>(R.id.textView2)
+        var sample1: TextView = view.findViewById(R.id.textView)
+        var sample2: TextView = view.findViewById(R.id.textView2)
     }
 }
