@@ -24,7 +24,7 @@ class MainAdapter (item : MutableList<Task>) : RecyclerView.Adapter<MainAdapter.
     override fun onBindViewHolder(holder: SampleViewHolder, position : Int) {
         var sampleText = item[position]
         holder.sample1.text = sampleText.name
-        holder.sample2.text = sampleText.desc
+//        holder.sample2.text = sampleText.desc
     }
 
     fun removeAt(position: Int){
@@ -34,6 +34,6 @@ class MainAdapter (item : MutableList<Task>) : RecyclerView.Adapter<MainAdapter.
 
     class SampleViewHolder(view : View) : RecyclerView.ViewHolder(view){
         var sample1: TextView = view.findViewById(R.id.textView)
-        var sample2: TextView = view.findViewById(R.id.textView2)
+//        var sample2: TextView = view.findViewById(R.id.textView2)
     }
 }

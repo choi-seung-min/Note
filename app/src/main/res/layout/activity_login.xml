@@ -27,7 +27,7 @@
     <View
             android:layout_width="150dp"
             android:layout_height="8dp"
-            android:background="@drawable/back_round"
+            android:background="@drawable/back_round_view"
             app:layout_constraintBottom_toTopOf="@+id/id"
             android:id="@+id/line"
             android:layout_marginBottom="60dp"
