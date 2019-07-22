@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         val mainAdapter = MainAdapter(setData())
         recycler_view.adapter = mainAdapter
         recycler_view.layoutManager = LinearLayoutManager(applicationContext)
+        val itemTouchHelper = ItemTouchHelper(SwipeController())
+        itemTouchHelper.attachToRecyclerView(recycler_view)
     }
 
     //setting tool bar menu
