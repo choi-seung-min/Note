@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNavigationItemSelectedListener{
 
-
+    var swipeController: SwipeController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +38,10 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         val mainAdapter = MainAdapter(setData())
         recycler_view.adapter = mainAdapter
         recycler_view.layoutManager = LinearLayoutManager(applicationContext)
+
+        swipeController = SwipeController(object: SwipeControllerActions(){})
+        //TODO: define onRightClicked but i cant
+
         val itemTouchHelper = ItemTouchHelper(SwipeController())
         itemTouchHelper.attachToRecyclerView(recycler_view)
     }
