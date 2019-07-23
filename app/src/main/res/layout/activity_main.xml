@@ -10,24 +10,21 @@
     <!-- main layout-->
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#fff">
+            android:layout_height="match_parent">
 
         <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
-                app:contentInsetStart="0dp"
-                android:backgroundTint="@color/colorPrimaryDark"
-                />
+                app:contentInsetStart="0dp"/>
 
         <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/recycler_view"
                 android:layout_below="@id/toolbar"
-                android:background="@color/colorPrimary"/>
+                android:background="#FFFFFF"/>
     </RelativeLayout>
 
     <!--navigation drawer-->
