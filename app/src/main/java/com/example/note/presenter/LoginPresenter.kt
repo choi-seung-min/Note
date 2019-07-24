@@ -4,23 +4,16 @@ import com.example.note.contract.LoginContract
 import com.example.note.repository.LoginRepository
 
 class LoginPresenter(
-    private val loginView :LoginContract.View,
-    private val loginRepository : LoginContract.Repository
-) : LoginContract.Presenter{
+    private val loginView: LoginContract.View,
+    private val loginRepository: LoginContract.Repository
+) : LoginContract.Presenter {
 
     override fun onClickLogIn() {
         val id = loginView.getId()
         val pw = loginView.getPassword()
 
-        if(id == ""){
-            loginView.showMessageForBlankID()
-        } else if (pw == ""){
-            loginView.showMessageForBlankPassword()
-        } else if(id == "" && pw ==""){
-            loginView.showMessageForBlankInput()
-        }
+        loginRepository.logIn(id, pw, object : LoginRepository.LoginListener {
 
-        loginRepository.logIn(id, pw, object : LoginRepository.LoginListener{
             override fun onSuccess() {
                 loginView.showMessageForLoginSuccess()
                 loginView.finishActivity()
@@ -28,7 +21,16 @@ class LoginPresenter(
             }
 
             override fun onFail() {
-                loginView.showMessageForLoginFail()
+                if (id == "") {
+                    loginView.showMessageForBlankID()
+                } else if (pw == "") {
+                    loginView.showMessageForBlankPassword()
+                } else if (id == "" && pw == "") {
+                    loginView.showMessageForBlankInput()
+                } else{
+                    loginView.showMessageForLoginFail()
+                    //TODO: don't show fail message. show why is it wrong. ex)wrong password.
+                }
                 loginView.clearInputForLoginFail()
             }
         })

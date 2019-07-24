@@ -8,12 +8,10 @@ import android.widget.TextView
 import com.example.note.R
 import com.example.note.Task
 
-class MainAdapter (item : MutableList<Task>) : RecyclerView.Adapter<MainAdapter.SampleViewHolder>() {
-
-    private var item : MutableList<Task> = item
+class MainAdapter (private var item: MutableList<Task>) : RecyclerView.Adapter<MainAdapter.SampleViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType : Int): SampleViewHolder {
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.main_rv_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.main_rv_item, parent, false)
         return SampleViewHolder(view)
     }
 
@@ -22,7 +20,7 @@ class MainAdapter (item : MutableList<Task>) : RecyclerView.Adapter<MainAdapter.
     }
 
     override fun onBindViewHolder(holder: SampleViewHolder, position : Int) {
-        var sampleText = item[position]
+        val sampleText = item[position]
         holder.sample1.text = sampleText.name
 //        holder.sample2.text = sampleText.desc
     }

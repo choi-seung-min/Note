@@ -1,5 +1,6 @@
 package com.example.note.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
@@ -8,12 +9,13 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.example.note.R
 import com.example.note.Task
 import com.example.note.contract.MainContract
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNavigationItemSelectedListener{
+class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +36,8 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         val mainAdapter = MainAdapter(setData())
         recycler_view.adapter = mainAdapter
         recycler_view.layoutManager = LinearLayoutManager(applicationContext)
+        
+        fab.setOnClickListener(this)
     }
 
     //setting tool bar menu
@@ -77,19 +81,25 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         }
     }
 
-    fun setData() : MutableList<Task>{
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.fab -> startActivity(Intent(this, EditActivity::class.java))
+        }
+    }
+
+    private fun setData() : MutableList<Task>{
         val dataList : MutableList<Task> = arrayListOf()
 
-        val list1 = Task("hi")
-        val list2 = Task("hello")
-        val list3 = Task("aloha")
-        val list4 = Task("hello world")
-        val list5 = Task("something")
-        val list6 = Task("anything")
-        val list7 = Task("nothing")
-        val list8 = Task("eight")
-        val list9 = Task("nine")
-        val list10 = Task( "finish")
+        val list1 = Task("hi", "wegrsrg")
+        val list2 = Task("hello", "sadas")
+        val list3 = Task("aloha", "edbggre")
+        val list4 = Task("hello world", "asdge")
+        val list5 = Task("something", "fvebdjh")
+        val list6 = Task("anything", "sakndjkasnd")
+        val list7 = Task("nothing", "kfjvnk")
+        val list8 = Task("eight", "samdajs")
+        val list9 = Task("nine", "sadnkajs")
+        val list10 = Task( "finish", "jdnaskd")
 
         dataList.add(list1)
         dataList.add(list2)
