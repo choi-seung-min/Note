@@ -1,14 +1,11 @@
 package com.example.note.ui.activity
 
-import android.graphics.Canvas
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.Menu
 import android.view.MenuItem
 import com.example.note.R
@@ -17,8 +14,6 @@ import com.example.note.contract.MainContract
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNavigationItemSelectedListener{
-
-    private var swipeController: SwipeController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,23 +34,6 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         val mainAdapter = MainAdapter(setData())
         recycler_view.adapter = mainAdapter
         recycler_view.layoutManager = LinearLayoutManager(applicationContext)
-
-        swipeController = SwipeController(object: SwipeControllerActions{
-            override fun onRightClicked(position: Int) {
-                mainAdapter.removeAt(position)
-                mainAdapter.notifyItemRemoved(position)
-                mainAdapter.notifyItemRangeChanged(position, mainAdapter.itemCount)
-            }
-        })
-
-        val itemTouchHelper = ItemTouchHelper(swipeController!!)
-        itemTouchHelper.attachToRecyclerView(recycler_view)
-
-        recycler_view.addItemDecoration(object: RecyclerView.ItemDecoration(){
-            override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
-                swipeController!!.onDraw(c)
-            }
-        })
     }
 
     //setting tool bar menu
