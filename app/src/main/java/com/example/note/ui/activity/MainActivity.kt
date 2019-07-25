@@ -11,11 +11,14 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.example.note.R
-import com.example.note.Task
 import com.example.note.contract.MainContract
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener{
+
+    companion object{
+        val adapter: MainAdapter = MainAdapter()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +36,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
 
         navigationView.setNavigationItemSelectedListener(this)
 
-        val mainAdapter = MainAdapter(setData())
-        recycler_view.adapter = mainAdapter
+        recycler_view.adapter = adapter
         recycler_view.layoutManager = LinearLayoutManager(applicationContext)
         
         fab.setOnClickListener(this)
@@ -87,31 +89,30 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         }
     }
 
-    private fun setData() : MutableList<Task>{
-        val dataList : MutableList<Task> = arrayListOf()
-
-        val list1 = Task("hi", "wegrsrg")
-        val list2 = Task("hello", "sadas")
-        val list3 = Task("aloha", "edbggre")
-        val list4 = Task("hello world", "asdge")
-        val list5 = Task("something", "fvebdjh")
-        val list6 = Task("anything", "sakndjkasnd")
-        val list7 = Task("nothing", "kfjvnk")
-        val list8 = Task("eight", "samdajs")
-        val list9 = Task("nine", "sadnkajs")
-        val list10 = Task( "finish", "jdnaskd")
-
-        dataList.add(list1)
-        dataList.add(list2)
-        dataList.add(list3)
-        dataList.add(list4)
-        dataList.add(list5)
-        dataList.add(list6)
-        dataList.add(list7)
-        dataList.add(list8)
-        dataList.add(list9)
-        dataList.add(list10)
-
-        return dataList
-    }
+//    private fun setData() : MutableList<Task>{
+//
+//        val list1 = Task("hi", "wegrsrg")
+//        val list2 = Task("hello", "sadas")
+//        val list3 = Task("aloha", "edbggre")
+//        val list4 = Task("hello world", "asdge")
+//        val list5 = Task("something", "fvebdjh")
+//        val list6 = Task("anything", "sakndjkasnd")
+//        val list7 = Task("nothing", "kfjvnk")
+//        val list8 = Task("eight", "samdajs")
+//        val list9 = Task("nine", "sadnkajs")
+//        val list10 = Task( "finish", "jdnaskd")
+//
+//        item.add(list1)
+//        item.add(list2)
+//        item.add(list3)
+//        item.add(list4)
+//        item.add(list5)
+//        item.add(list6)
+//        item.add(list7)
+//        item.add(list8)
+//        item.add(list9)
+//        item.add(list10)
+//
+//        return
+//    }
 }

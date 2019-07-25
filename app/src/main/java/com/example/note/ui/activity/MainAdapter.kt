@@ -8,7 +8,9 @@ import android.widget.TextView
 import com.example.note.R
 import com.example.note.Task
 
-class MainAdapter (private var item: MutableList<Task>) : RecyclerView.Adapter<MainAdapter.SampleViewHolder>() {
+class MainAdapter : RecyclerView.Adapter<MainAdapter.SampleViewHolder>() {
+
+    var item: MutableList<Task> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType : Int): SampleViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.main_rv_item, parent, false)
@@ -28,6 +30,11 @@ class MainAdapter (private var item: MutableList<Task>) : RecyclerView.Adapter<M
     fun removeAt(position: Int){
         item.removeAt(position)
         notifyItemRemoved(position)
+    }
+
+    fun insert(editData: Task){
+        item.add(editData)
+        notifyItemInserted(item.size)
     }
 
     class SampleViewHolder(view : View) : RecyclerView.ViewHolder(view){
