@@ -1,16 +1,18 @@
 package com.example.note.ui.activity
 
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.example.note.R
 import com.example.note.Task
 
 class MainAdapter : RecyclerView.Adapter<MainAdapter.SampleViewHolder>() {
 
-    var item: MutableList<Task> = arrayListOf()
+    var item: ArrayList<Task> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType : Int): SampleViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.main_rv_item, parent, false)
@@ -23,8 +25,8 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.SampleViewHolder>() {
 
     override fun onBindViewHolder(holder: SampleViewHolder, position : Int) {
         val sampleText = item[position]
-        holder.sample1.text = sampleText.name
-//        holder.sample2.text = sampleText.desc
+        holder.sample1.text = sampleText.title
+//        holder.sample2.text = sampleText.contents
     }
 
     fun removeAt(position: Int){
@@ -37,8 +39,24 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.SampleViewHolder>() {
         notifyItemInserted(item.size)
     }
 
-    class SampleViewHolder(view : View) : RecyclerView.ViewHolder(view){
+    fun replace(editData: Task, position: Int){
+        item[position] = editData
+        notifyItemChanged(position)
+    }
+
+    inner class SampleViewHolder(view : View) : RecyclerView.ViewHolder(view){
+
         var sample1: TextView = view.findViewById(R.id.textView)
-//        var sample2: TextView = view.findViewById(R.id.textView2)
+
+        init {
+            view.setOnClickListener {
+                val position = adapterPosition
+                val intent = Intent(it?.context, EditActivity::class.java)
+                intent.putExtra("data", item[position])
+                intent.putExtra("position", position)
+                it?.context?.startActivity(intent)
+                Toast.makeText(it?.context, "clicked $position item", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 }

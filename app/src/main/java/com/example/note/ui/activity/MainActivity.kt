@@ -88,31 +88,4 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
             R.id.fab -> startActivity(Intent(this, EditActivity::class.java))
         }
     }
-
-//    private fun setData() : MutableList<Task>{
-//
-//        val list1 = Task("hi", "wegrsrg")
-//        val list2 = Task("hello", "sadas")
-//        val list3 = Task("aloha", "edbggre")
-//        val list4 = Task("hello world", "asdge")
-//        val list5 = Task("something", "fvebdjh")
-//        val list6 = Task("anything", "sakndjkasnd")
-//        val list7 = Task("nothing", "kfjvnk")
-//        val list8 = Task("eight", "samdajs")
-//        val list9 = Task("nine", "sadnkajs")
-//        val list10 = Task( "finish", "jdnaskd")
-//
-//        item.add(list1)
-//        item.add(list2)
-//        item.add(list3)
-//        item.add(list4)
-//        item.add(list5)
-//        item.add(list6)
-//        item.add(list7)
-//        item.add(list8)
-//        item.add(list9)
-//        item.add(list10)
-//
-//        return
-//    }
 }
