@@ -26,7 +26,6 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.SampleViewHolder>() {
     override fun onBindViewHolder(holder: SampleViewHolder, position : Int) {
         val sampleText = item[position]
         holder.sample1.text = sampleText.title
-//        holder.sample2.text = sampleText.contents
     }
 
     fun removeAt(position: Int){

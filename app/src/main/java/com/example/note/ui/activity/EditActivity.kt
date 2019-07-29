@@ -1,7 +1,9 @@
 package com.example.note.ui.activity
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.example.note.R
 import com.example.note.Task
@@ -15,17 +17,17 @@ class EditActivity : AppCompatActivity() {
         var flag = false
         val data: ArrayList<Task> = MainActivity.adapter.item
         var position = 0
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
         if(intent.hasExtra("position")){
-//            data = intent.getParcelableExtra("data")
             position = intent.getIntExtra("position", 0)
-//            edit_title.setText(data.title)
-//            edit_contents.setText(data.contents)
             edit_title.setText(data[position].title)
             edit_contents.setText(data[position].contents)
+            imm.showSoftInput(edit_contents, 0)
             flag = true
         } else{
             Toast.makeText(this, "New Note", Toast.LENGTH_SHORT).show()
+            imm.showSoftInput(edit_title, 0)
         }
 
         button_save.setOnClickListener {
