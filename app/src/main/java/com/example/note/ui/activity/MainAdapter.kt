@@ -52,10 +52,10 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.SampleViewHolder>() {
             view.setOnClickListener {
                 val position = adapterPosition
                 val intent = Intent(it?.context, EditActivity::class.java)
-                intent.putExtra("data", item[position])
+//                intent.putExtra("data", item[position])
                 intent.putExtra("position", position)
                 it?.context?.startActivity(intent)
-                Toast.makeText(it?.context, "clicked $position item", Toast.LENGTH_LONG).show()
+                Toast.makeText(it?.context, "clicked ${position+1} item", Toast.LENGTH_LONG).show()
             }
         }
     }
