@@ -25,7 +25,8 @@
             android:layout_marginEnd="10dp"
             app:layout_constraintStart_toEndOf="@+id/button_save"
             android:layout_marginTop="10dp"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            android:backgroundTint="@color/colorAccent"/>
 
     <TextView
             android:id="@+id/text_title"
