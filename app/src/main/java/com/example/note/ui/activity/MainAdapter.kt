@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.example.note.R
-import com.example.note.Task
+import com.example.note.data.model.Task
 
 class MainAdapter : RecyclerView.Adapter<MainAdapter.SampleViewHolder>() {
 

@@ -1,4 +1,4 @@
-package com.example.note.repository
+package com.example.note.data.repository
 
 import com.example.note.contract.EditContract
 

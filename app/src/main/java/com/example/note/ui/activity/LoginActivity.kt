@@ -10,7 +10,7 @@ import android.widget.Toast
 import com.example.note.R
 import com.example.note.contract.LoginContract
 import com.example.note.presenter.LoginPresenter
-import com.example.note.repository.LoginRepository
+import com.example.note.data.repository.LoginRepository
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), LoginContract.View {
@@ -21,7 +21,9 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val loginPresenter = LoginPresenter(this, LoginRepository())
+        val loginPresenter = LoginPresenter(this,
+            LoginRepository()
+        )
 
         login.setOnClickListener {
             loginPresenter.onClickLogIn()
@@ -39,12 +41,6 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         id.setText("")
         password.setText("")
     }
-
-    override fun showMessageForBlankID() = Toast.makeText(this, "ID 입력란이 비어있습니다.", Toast.LENGTH_SHORT).show()
-
-    override fun showMessageForBlankPassword() = Toast.makeText(this, "비밀번호 입력창이 비어있습니다.", Toast.LENGTH_LONG).show()
-
-    override fun showMessageForBlankInput() = Toast.makeText(this, "입력창이 모두 비어있습니다.", Toast.LENGTH_LONG).show()
 
     override fun getId(): String = id.text.toString()
 

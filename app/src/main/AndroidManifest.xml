@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.example.note">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -21,4 +23,5 @@
                   android:windowSoftInputMode="adjustPan"/>
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

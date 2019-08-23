@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.example.note.R
-import com.example.note.Task
+import com.example.note.data.model.Task
 import kotlinx.android.synthetic.main.activity_edit.*
 
 class EditActivity : AppCompatActivity() {
@@ -32,7 +32,10 @@ class EditActivity : AppCompatActivity() {
 
         button_save.setOnClickListener {
 
-            val editData = Task(edit_title.text.toString(), edit_contents.text.toString())
+            val editData = Task(
+                edit_title.text.toString(),
+                edit_contents.text.toString()
+            )
 
             if(flag){
                 MainActivity.adapter.replace(editData, position)

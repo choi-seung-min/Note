@@ -1,6 +1,6 @@
 package com.example.note.contract
 
-import com.example.note.repository.EditRepository
+import com.example.note.data.repository.EditRepository
 
 interface EditContract{
     interface View{

@@ -1,7 +1,7 @@
 package com.example.note.presenter
 
 import com.example.note.contract.EditContract
-import com.example.note.repository.EditRepository
+import com.example.note.data.repository.EditRepository
 
 class EditPresenter (
     private val editView: EditContract.View,

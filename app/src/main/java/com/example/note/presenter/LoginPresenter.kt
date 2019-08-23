@@ -1,7 +1,7 @@
 package com.example.note.presenter
 
 import com.example.note.contract.LoginContract
-import com.example.note.repository.LoginRepository
+import com.example.note.data.repository.LoginRepository
 
 class LoginPresenter(
     private val loginView: LoginContract.View,
@@ -21,16 +21,7 @@ class LoginPresenter(
             }
 
             override fun onFail() {
-                if (id == "") {
-                    loginView.showMessageForBlankID()
-                } else if (pw == "") {
-                    loginView.showMessageForBlankPassword()
-                } else if (id == "" && pw == "") {
-                    loginView.showMessageForBlankInput()
-                } else{
-                    loginView.showMessageForLoginFail()
-                    //TODO: don't show fail message. show why is it wrong. ex)wrong password.
-                }
+                loginView.showMessageForLoginFail()
                 loginView.clearInputForLoginFail()
             }
         })
