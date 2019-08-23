@@ -6,9 +6,9 @@ interface EditContract{
     interface View{
         fun showMessageForNewNote()
         fun showMessageForNoteDelete()
-        fun showMessageForNpteSave()
-        fun getTitle(): String
-        fun getContents(): String
+        fun showMessageForNoteSave()
+        fun getNoteTitle() : String
+        fun getNoteContent() : String
     }
     interface Presenter{
         fun onClickSave()
@@ -16,7 +16,7 @@ interface EditContract{
     }
 
     interface Repository{
-        fun save(title: String, contents: String, listener: EditRepository.SaveListener)
+        fun save(title: String, contents: String, date: String, id: String, flag: Boolean, listener: EditRepository.SaveListener)
         fun delete(listener: EditRepository.DeleteListener)
     }
 }

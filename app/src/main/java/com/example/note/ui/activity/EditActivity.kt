@@ -6,10 +6,16 @@ import android.support.v7.app.AppCompatActivity
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.example.note.R
+import com.example.note.contract.EditContract
 import com.example.note.data.model.Task
+import com.example.note.data.repository.EditRepository
+import com.example.note.presenter.EditPresenter
 import kotlinx.android.synthetic.main.activity_edit.*
 
-class EditActivity : AppCompatActivity() {
+class EditActivity : AppCompatActivity(), EditContract.View{
+
+    val editPresenter = EditPresenter(this, EditRepository())
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
@@ -56,4 +62,14 @@ class EditActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun showMessageForNewNote() = Toast.makeText(this@EditActivity, "New Note!", Toast.LENGTH_SHORT).show()
+
+    override fun showMessageForNoteDelete() = Toast.makeText(this@EditActivity, "Note Deleted", Toast.LENGTH_SHORT).show()
+
+    override fun showMessageForNoteSave() = Toast.makeText(this@EditActivity, "Note not saved", Toast.LENGTH_SHORT).show()
+
+    override fun getNoteTitle(): String = edit_title.text.toString()
+
+    override fun getNoteContent(): String = edit_contents.text.toString()
 }

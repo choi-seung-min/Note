@@ -71,16 +71,27 @@
             tools:targetApi="O"/>
 
     <Button
+            android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="130dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/login"
-            app:layout_constraintHorizontal_bias="0.5"
-            android:text="@string/login"
+            android:layout_marginBottom="15dp"
             android:backgroundTint="@android:color/darker_gray"
-            android:textColor="@android:color/black"/>
+            android:text="@string/login"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toTopOf="@+id/signup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+            android:id="@+id/signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp"
+            android:text="Button"
+            android:backgroundTint="@android:color/darker_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
