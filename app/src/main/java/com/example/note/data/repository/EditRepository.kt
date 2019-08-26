@@ -24,9 +24,20 @@ class EditRepository : EditContract.Repository{
         fun onFail()
     }
 
-    override fun save(title: String, contents: String, date: String, id: String, flag: Boolean,  listener: SaveListener) {
+    override fun save(title: String, contents: String, date: String, id: String, note_id: String, flag: Boolean,  listener: SaveListener) {
         if(flag){
             val call = retrofitService.addNote(title, contents, date, id)
+            call.enqueue(object : Callback<Unit>{
+                override fun onFailure(call: Call<Unit>?, t: Throwable?) {
+                    listener.onFail()
+                }
+
+                override fun onResponse(call: Call<Unit>?, response: Response<Unit>?) {
+                    listener.onSuccess()
+                }
+            })
+        } else if(!flag){
+            val call = retrofitService.modifyNote(title, contents, date,note_id, id)
             call.enqueue(object : Callback<Unit>{
                 override fun onFailure(call: Call<Unit>?, t: Throwable?) {
                     listener.onFail()

@@ -1,6 +1,5 @@
 package com.example.note.data.repository
 
-import android.widget.Toast
 import com.example.note.contract.LoginContract
 import com.example.note.data.RetrofitService
 import com.example.note.data.model.LoginData
@@ -31,7 +30,6 @@ class LoginRepository : LoginContract.Repository{
             override fun onResponse(call: Call<LoginData>?, response: Response<LoginData>?) {
                 listener.onSuccess()
             }
-
         })
     }
 }

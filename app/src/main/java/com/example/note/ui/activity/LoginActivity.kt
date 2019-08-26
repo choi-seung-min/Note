@@ -19,9 +19,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val loginPresenter = LoginPresenter(this,
-            LoginRepository()
-        )
+        val loginPresenter = LoginPresenter(this, LoginRepository(), this)
 
         login.setOnClickListener {
             loginPresenter.onClickLogIn()

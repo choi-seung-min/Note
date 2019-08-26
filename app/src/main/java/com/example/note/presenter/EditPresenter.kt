@@ -22,8 +22,9 @@ class EditPresenter (
         //TODO: get user id
         val flag = true
         //TODO: get Flag of new, modify note(true == new)
+        val noteId = "test"
 
-        editRepository.save(title, contents, strDate, id, flag, object : EditRepository.SaveListener{
+        editRepository.save(title, contents, strDate, id, noteId, flag, object : EditRepository.SaveListener{
 
             override fun onSuccess() {
                 editView.showMessageForNoteSave()

@@ -14,13 +14,13 @@ import kotlinx.android.synthetic.main.activity_edit.*
 
 class EditActivity : AppCompatActivity(), EditContract.View{
 
-    val editPresenter = EditPresenter(this, EditRepository())
+
+    private val editPresenter = EditPresenter(this, EditRepository())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
 
-        var flag = false
         val data: ArrayList<Task> = MainActivity.adapter.item
         var position = 0
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -30,36 +30,24 @@ class EditActivity : AppCompatActivity(), EditContract.View{
             edit_title.setText(data[position].title)
             edit_contents.setText(data[position].contents)
             imm.showSoftInput(edit_contents, 0)
-            flag = true
         } else{
             Toast.makeText(this, "New Note", Toast.LENGTH_SHORT).show()
             imm.showSoftInput(edit_title, 0)
         }
 
         button_save.setOnClickListener {
-
-            val editData = Task(
-                edit_title.text.toString(),
-                edit_contents.text.toString()
-            )
-
-            if(flag){
-                MainActivity.adapter.replace(editData, position)
-                finish()
-            } else{
-                MainActivity.adapter.insert(editData)
-                finish()
-            }
+            editPresenter.onClickSave()
         }
 
         button_delete.setOnClickListener {
-            if(intent.hasExtra("position")){
-                MainActivity.adapter.removeAt(position)
-                Toast.makeText(this, "item$position deleted", Toast.LENGTH_SHORT).show()
-                finish()
-            } else{
-                Toast.makeText(this, "there's nothing saved", Toast.LENGTH_LONG).show()
-            }
+            editPresenter.onClickDelete()
+//            if(intent.hasExtra("position")){
+//                MainActivity.adapter.removeAt(position)
+//                Toast.makeText(this, "item$position deleted", Toast.LENGTH_SHORT).show()
+//                finish()
+//            } else{
+//                Toast.makeText(this, "there's nothing saved", Toast.LENGTH_LONG).show()
+//            }
         }
     }
 
@@ -67,7 +55,9 @@ class EditActivity : AppCompatActivity(), EditContract.View{
 
     override fun showMessageForNoteDelete() = Toast.makeText(this@EditActivity, "Note Deleted", Toast.LENGTH_SHORT).show()
 
-    override fun showMessageForNoteSave() = Toast.makeText(this@EditActivity, "Note not saved", Toast.LENGTH_SHORT).show()
+    override fun showMessageForNoteSave() = Toast.makeText(this@EditActivity, "Note saved", Toast.LENGTH_SHORT).show()
+
+    override fun showMessageForNoteSaveFail() = Toast.makeText(this@EditActivity, "Note not saved", Toast.LENGTH_SHORT).show()
 
     override fun getNoteTitle(): String = edit_title.text.toString()
 
