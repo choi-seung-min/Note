@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.example.note.R
-import com.example.note.data.model.Task
+import com.example.note.data.model.Note
 
 class MainAdapter : RecyclerView.Adapter<MainAdapter.SampleViewHolder>() {
 
-    var item: ArrayList<Task> = arrayListOf()
+    var item: ArrayList<Note> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType : Int): SampleViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.main_rv_item, parent, false)
@@ -33,12 +33,12 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.SampleViewHolder>() {
         notifyItemRemoved(position)
     }
 
-    fun insert(editData: Task){
+    fun insert(editData: Note){
         item.add(editData)
         notifyItemInserted(item.size)
     }
 
-    fun replace(editData: Task, position: Int){
+    fun replace(editData: Note, position: Int){
         item[position] = editData
         notifyItemChanged(position)
     }

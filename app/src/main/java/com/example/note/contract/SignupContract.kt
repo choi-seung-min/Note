@@ -1,9 +1,14 @@
 package com.example.note.contract
 
+import com.example.note.data.repository.SignupRepository
+
 interface SignupContract {
     interface View{
         fun showMessageForSignupSuccess()
         fun showMessageForSignupFail()
+        fun getName() : String
+        fun getId() : String
+        fun getPassword() : String
     }
 
     interface Presenter{
@@ -11,6 +16,6 @@ interface SignupContract {
     }
 
     interface Repository{
-        fun Signup()
+        fun Signup(name: String, id: String, password: String, listener: SignupRepository.SignupListener)
     }
 }

@@ -1,33 +1,33 @@
 package com.example.note.data.repository
 
-import com.example.note.contract.LoginContract
+import android.widget.Toast
+import com.example.note.contract.SignupContract
 import com.example.note.data.RetrofitService
-import com.example.note.data.model.LoginData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class LoginRepository : LoginContract.Repository{
+class SignupRepository : SignupContract.Repository{
 
     private val URL = "http://10.156.145.148:1234"
 
-    interface LoginListener{
+    interface SignupListener{
         fun onSuccess()
         fun onFail()
     }
 
-    override fun logIn(id: String, password: String, listener: LoginListener) {
+    override fun Signup(name: String, id: String, password: String, listener: SignupListener) {
         val retrofit = Retrofit.Builder().baseUrl(URL).addConverterFactory(GsonConverterFactory.create()).build()
         val retrofitService = retrofit.create(RetrofitService::class.java)
-        val call = retrofitService.login(id, password)
-        call.enqueue(object : Callback<LoginData>{
-            override fun onFailure(call: Call<LoginData>?, t: Throwable?) {
+        val call = retrofitService.signUp(name, id, password)
+        call.enqueue(object : Callback<Unit>{
+            override fun onFailure(call: Call<Unit>?, t: Throwable?) {
                 listener.onFail()
             }
 
-            override fun onResponse(call: Call<LoginData>?, response: Response<LoginData>?) {
+            override fun onResponse(call: Call<Unit>?, response: Response<Unit>?) {
                 listener.onSuccess()
             }
         })

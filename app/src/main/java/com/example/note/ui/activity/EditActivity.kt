@@ -7,7 +7,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.example.note.R
 import com.example.note.contract.EditContract
-import com.example.note.data.model.Task
+import com.example.note.data.model.Note
 import com.example.note.data.repository.EditRepository
 import com.example.note.presenter.EditPresenter
 import kotlinx.android.synthetic.main.activity_edit.*
@@ -21,14 +21,14 @@ class EditActivity : AppCompatActivity(), EditContract.View{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
 
-        val data: ArrayList<Task> = MainActivity.adapter.item
-        var position = 0
+        val data: ArrayList<Note> = MainActivity.adapter.item
+        var position: Int
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
         if(intent.hasExtra("position")){
             position = intent.getIntExtra("position", 0)
             edit_title.setText(data[position].title)
-            edit_contents.setText(data[position].contents)
+            edit_contents.setText(data[position].content)
             imm.showSoftInput(edit_contents, 0)
         } else{
             Toast.makeText(this, "New Note", Toast.LENGTH_SHORT).show()

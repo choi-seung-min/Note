@@ -21,6 +21,7 @@
         <activity android:name=".ui.activity.MainActivity"/>
         <activity android:name=".ui.activity.EditActivity"
                   android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".ui.activity.SignupActivity"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>
