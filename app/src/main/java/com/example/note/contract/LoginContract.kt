@@ -10,11 +10,13 @@ interface LoginContract{
         fun getId() : String
         fun getPassword() : String
         fun startNoteActivity()
+        fun startSignupActivity()
         fun finishActivity()
         fun hideKeyboard()
     }
     interface Presenter{
         fun onClickLogIn()
+        fun onClickSignup()
     }
 
     interface  Repository{

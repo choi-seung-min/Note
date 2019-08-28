@@ -11,6 +11,7 @@ class LoginPresenter(
     context: Context
 ) : LoginContract.Presenter {
 
+
     val pref = PrefHelper.getInstance(context)
 
     override fun onClickLogIn() {
@@ -31,5 +32,9 @@ class LoginPresenter(
                 loginView.clearInputForLoginFail()
             }
         })
+    }
+
+    override fun onClickSignup() {
+        loginView.startSignupActivity()
     }
 }
