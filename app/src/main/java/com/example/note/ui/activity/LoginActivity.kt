@@ -22,6 +22,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
         login.setOnClickListener {
             loginPresenter.onClickLogIn()
+            //TODO: is it right to call start activity here?
             hideKeyboard()
         }
 //        login.setOnFocusChangeListener { v , hasFocus ->  if(hasFocus) hideKeyboard() }

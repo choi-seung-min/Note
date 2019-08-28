@@ -22,7 +22,7 @@ class EditActivity : AppCompatActivity(), EditContract.View{
         setContentView(R.layout.activity_edit)
 
         val data: ArrayList<Note> = MainActivity.adapter.item
-        var position: Int
+        val position: Int
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
         if(intent.hasExtra("position")){
