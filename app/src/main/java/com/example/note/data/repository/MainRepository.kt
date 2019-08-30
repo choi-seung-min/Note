@@ -15,11 +15,11 @@ class MainRepository: MainContract.Repository{
     private val URL = "http://10.156.145.148:1234"
 
     interface GetNotesListener{
-        fun onSuccess(call: Call<ArrayList<Note>>?)
+        fun onSuccess(items: ArrayList<Note>?)
         fun onFail()
     }
 
-    override fun getNoteList(id: String, listener: GetNotesListener) {
+    override fun getNoteList(id: String?, listener: GetNotesListener) {
         val retrofit = Retrofit.Builder().baseUrl(URL).addConverterFactory(GsonConverterFactory.create()).build()
         val retrofitService = retrofit.create(RetrofitService::class.java)
         val call = retrofitService.getNotes(id)
@@ -28,13 +28,13 @@ class MainRepository: MainContract.Repository{
                 listener.onFail()
             }
 
-            override fun onResponse(
-                call: Call<ArrayList<Note>>?,
-                response: Response<ArrayList<Note>>?
-            ) {
-                listener.onSuccess(call)
+            override fun onResponse(call: Call<ArrayList<Note>>?, response: Response<ArrayList<Note>>?) {
+                if (response?.code() == 200){
+                    listener.onSuccess(response.body())
+                } else if(response?.code() == 500){
+                    listener.onFail()
+                }
             }
-
         })
     }
 }

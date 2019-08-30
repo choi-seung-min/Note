@@ -10,14 +10,15 @@ interface EditContract{
         fun showMessageForNoteSaveFail()
         fun getNoteTitle() : String
         fun getNoteContent() : String
+        fun finishActivity()
     }
     interface Presenter{
-        fun onClickSave()
+        fun onClickSave(note_id: Int, position: Int)
         fun onClickDelete()
     }
 
     interface Repository{
-        fun save(title: String, contents: String, date: String, id: String, note_id: String, flag: Boolean, listener: EditRepository.SaveListener)
+        fun save(title: String, contents: String, date: String, id: String?, note_id: Int, flag: Boolean, listener: EditRepository.SaveListener, nListener: EditRepository.NewSaveListener)
         fun delete(listener: EditRepository.DeleteListener)
     }
 }

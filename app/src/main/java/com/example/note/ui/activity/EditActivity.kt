@@ -21,22 +21,24 @@ class EditActivity : AppCompatActivity(), EditContract.View{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
 
-        val data: ArrayList<Note> = MainActivity.adapter.item
-        val position: Int
+        val data: ArrayList<Note>? = MainActivity.adapter.item
+        val position: Int = intent.getIntExtra("position", 0)
+        val noteId : Int = intent.getIntExtra("note_id", 0)
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
-        if(intent.hasExtra("position")){
-            position = intent.getIntExtra("position", 0)
-            edit_title.setText(data[position].title)
-            edit_contents.setText(data[position].content)
+        if(intent.hasExtra("note_id")){
+            editPresenter.flag = false
+            edit_title.setText(data?.get(position)?.title)
+            edit_contents.setText(data?.get(position)?.content)
             imm.showSoftInput(edit_contents, 0)
         } else{
             Toast.makeText(this, "New Note", Toast.LENGTH_SHORT).show()
+            editPresenter.flag = true
             imm.showSoftInput(edit_title, 0)
         }
 
         button_save.setOnClickListener {
-            editPresenter.onClickSave()
+            editPresenter.onClickSave(noteId, position)
         }
 
         button_delete.setOnClickListener {
@@ -62,4 +64,6 @@ class EditActivity : AppCompatActivity(), EditContract.View{
     override fun getNoteTitle(): String = edit_title.text.toString()
 
     override fun getNoteContent(): String = edit_contents.text.toString()
+
+    override fun finishActivity()  = finish()
 }

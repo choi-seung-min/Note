@@ -1,32 +1,27 @@
 package com.example.note.presenter
 
 import com.example.note.contract.MainContract
+import com.example.note.data.local.PrefHelper
 import com.example.note.data.model.Note
 import com.example.note.data.repository.MainRepository
-import retrofit2.Call
+import com.example.note.ui.activity.MainActivity
 
 class MainPresenter (
     private val mainView: MainContract.View,
     private val mainRepository: MainContract.Repository
 ): MainContract.Presenter{
 
-    val testId = "asd"
+    val prefHelper = PrefHelper.getInstance(MainActivity())
+    val id = prefHelper?.getId()
 
     override fun onStarted() {
-        mainRepository.getNoteList(testId, object : MainRepository.GetNotesListener{
-            override fun onSuccess(call: Call<ArrayList<Note>>?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        mainRepository.getNoteList(id, object : MainRepository.GetNotesListener{
+            override fun onSuccess(items: ArrayList<Note>?) {
+                mainView.addItems(items)
             }
-
             override fun onFail() {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                mainView.showMessageForDataLoadingFail()
             }
-
         })
     }
-
-    override fun onClickItem() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
 }

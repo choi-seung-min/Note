@@ -1,7 +1,11 @@
 package com.example.note.presenter
 
 import com.example.note.contract.EditContract
+import com.example.note.data.local.PrefHelper
+import com.example.note.data.model.Note
 import com.example.note.data.repository.EditRepository
+import com.example.note.ui.activity.EditActivity
+import com.example.note.ui.activity.MainActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -10,29 +14,43 @@ class EditPresenter (
     private val editRepository: EditContract.Repository
 ) : EditContract.Presenter{
 
-    override fun onClickSave() {
+    var flag: Boolean = true
+    //Flag of new, modify note(true == new)
+
+    override fun onClickSave(note_id: Int, position: Int) {
         val title = editView.getNoteTitle()
         val contents = editView.getNoteContent()
-        val dateFormat = SimpleDateFormat("yyyy-mm--dd-ss")
+        val dateFormat = SimpleDateFormat("yyyy-mm-dd-ss")
         val date = GregorianCalendar(Locale.KOREA)
         date.time = Date()
         val strDate = dateFormat.format(date.time)
 
-        val id = "test"
-        //TODO: get user id
-        val flag = true
-        //TODO: get Flag of new, modify note(true == new)
-        val noteId = "test"
+        val prefHelper = PrefHelper.getInstance(EditActivity())
+        val id = prefHelper?.getId()
 
-        editRepository.save(title, contents, strDate, id, noteId, flag, object : EditRepository.SaveListener{
+        editRepository.save(title, contents, strDate, id, note_id, flag, object : EditRepository.SaveListener{
 
-            override fun onSuccess() {
+            override fun onSuccess(note: Note) {
+                MainActivity.adapter.item?.set(position, note)
+                MainActivity.adapter.notifyDataSetChanged()
                 editView.showMessageForNoteSave()
+                editView.finishActivity()
             }
 
             override fun onFail() {
-                editView.showMessageForNoteSave()
+                editView.showMessageForNoteSaveFail()
             }
+        }, object : EditRepository.NewSaveListener{
+            override fun onSuccess(note: Note) {
+                MainActivity.adapter.item!!.add(note)
+                MainActivity.adapter.notifyItemInserted(MainActivity.adapter.itemCount+1)
+                editView.showMessageForNoteSave()
+                editView.finishActivity()
+            }
+            override fun onFail() {
+                editView.showMessageForNoteSaveFail()
+            }
+
         })
     }
 

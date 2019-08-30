@@ -10,9 +10,14 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.example.note.R
 import com.example.note.contract.MainContract
+import com.example.note.data.model.Note
+import com.example.note.data.repository.MainRepository
+import com.example.note.presenter.MainPresenter
 import kotlinx.android.synthetic.main.activity_main.*
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener{
 
@@ -24,7 +29,10 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val mainPresenter = MainPresenter(this, MainRepository())
+
         init()
+        mainPresenter.onStarted()
     }
 
     override fun init() {
@@ -81,6 +89,14 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         } else{
             super.onBackPressed()
         }
+    }
+
+    override fun addItems(items: ArrayList<Note>?) {
+        adapter.item = items
+    }
+
+    override fun showMessageForDataLoadingFail() {
+        Toast.makeText(this@MainActivity, "Data Loading Failed", Toast.LENGTH_LONG).show()
     }
 
     override fun onClick(v: View?) {

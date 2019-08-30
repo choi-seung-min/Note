@@ -12,7 +12,7 @@ import com.example.note.data.model.Note
 
 class MainAdapter : RecyclerView.Adapter<MainAdapter.SampleViewHolder>() {
 
-    var item: ArrayList<Note> = arrayListOf()
+    var item: ArrayList<Note>? = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType : Int): SampleViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.main_rv_item, parent, false)
@@ -20,26 +20,30 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.SampleViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return item.size
+        return if(item == null){
+            0
+        } else{
+            item?.size!!
+        }
     }
 
     override fun onBindViewHolder(holder: SampleViewHolder, position : Int) {
-        val sampleText = item[position]
-        holder.sample1.text = sampleText.title
+        val sampleText = item?.get(position)
+        holder.sample1.text = sampleText?.title
     }
 
     fun removeAt(position: Int){
-        item.removeAt(position)
+        item?.removeAt(position)
         notifyItemRemoved(position)
     }
 
     fun insert(editData: Note){
-        item.add(editData)
-        notifyItemInserted(item.size)
+        item?.add(editData)
+        notifyItemInserted(item!!.size)
     }
 
     fun replace(editData: Note, position: Int){
-        item[position] = editData
+        item?.set(position, editData)
         notifyItemChanged(position)
     }
 
@@ -53,6 +57,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.SampleViewHolder>() {
                 val intent = Intent(it?.context, EditActivity::class.java)
 //                intent.putExtra("data", item[position])
                 intent.putExtra("position", position)
+                intent.putExtra("note_id", item?.get(position)?.note_id)
                 it?.context?.startActivity(intent)
                 Toast.makeText(it?.context, "clicked ${position+1} item", Toast.LENGTH_LONG).show()
             }
