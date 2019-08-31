@@ -5,7 +5,7 @@ import com.example.note.data.repository.LoginRepository
 interface LoginContract{
     interface View{
         fun showMessageForLoginSuccess()
-        fun showMessageForLoginFail()
+        fun showMessageForLoginFail(t: Throwable?)
         fun clearInputForLoginFail()
         fun getId() : String
         fun getPassword() : String

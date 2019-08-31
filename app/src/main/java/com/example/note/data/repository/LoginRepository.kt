@@ -15,7 +15,7 @@ class LoginRepository : LoginContract.Repository{
 
     interface LoginListener{
         fun onSuccess()
-        fun onFail()
+        fun onFail(t: Throwable?)
     }
 
     override fun logIn(id: String, password: String, listener: LoginListener) {
@@ -24,11 +24,15 @@ class LoginRepository : LoginContract.Repository{
         val call = retrofitService.login(id, password)
         call.enqueue(object : Callback<LoginData>{
             override fun onFailure(call: Call<LoginData>?, t: Throwable?) {
-                listener.onFail()
+                listener.onFail(t)
             }
 
             override fun onResponse(call: Call<LoginData>?, response: Response<LoginData>?) {
-                listener.onSuccess()
+                if (response?.code() == 200){
+                    listener.onSuccess()
+                } else if(response?.code() == 500){
+                    listener.onFail(null)
+                }
             }
         })
     }

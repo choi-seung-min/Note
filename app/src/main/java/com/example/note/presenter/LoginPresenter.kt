@@ -27,8 +27,8 @@ class LoginPresenter(
                 pref?.setId(id)
             }
 
-            override fun onFail() {
-                loginView.showMessageForLoginFail()
+            override fun onFail(t: Throwable?) {
+                loginView.showMessageForLoginFail(t)
                 loginView.clearInputForLoginFail()
             }
         })

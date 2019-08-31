@@ -37,11 +37,11 @@ class EditActivity : AppCompatActivity(), EditContract.View{
         }
 
         button_save.setOnClickListener {
+            //TODO: null check title and contents
             editPresenter.onClickSave(noteId, position)
         }
 
         button_delete.setOnClickListener {
-            Toast.makeText(this, "Foo", Toast.LENGTH_SHORT).show()
             editPresenter.onClickDelete(noteId, position)
         }
     }

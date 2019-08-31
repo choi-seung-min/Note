@@ -25,4 +25,13 @@ class PrefHelper(private val context: Context) {
     fun getId(): String? {
         return preference.getString("USER_ID", "")
     }
+
+    fun setURL(URL: String){
+        preference.edit().putString("URL", URL).apply()
+    }
+
+    fun getURL(): String?{
+        return preference.getString("URL", "")
+    }
+    //TODO: URL to local
 }
