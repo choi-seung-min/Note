@@ -55,7 +55,6 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.SampleViewHolder>() {
             view.setOnClickListener {
                 val position = adapterPosition
                 val intent = Intent(it?.context, EditActivity::class.java)
-//                intent.putExtra("data", item[position])
                 intent.putExtra("position", position)
                 intent.putExtra("note_id", item?.get(position)?.note_id)
                 it?.context?.startActivity(intent)

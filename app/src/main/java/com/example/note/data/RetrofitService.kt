@@ -26,4 +26,7 @@ interface RetrofitService {
     @FormUrlEncoded
     @POST("/user/signup")
     fun signUp(@Field("name") name: String, @Field("id") id: String, @Field("password") password: String): Call<Unit>
+
+    @DELETE("/note/deleteNote")
+    fun deleteNote(@Query("note_id") id: Int): Call<Unit>
 }

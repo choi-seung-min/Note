@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val mainPresenter = MainPresenter(this, MainRepository())
+        val mainPresenter = MainPresenter(this, MainRepository(), this)
 
         init()
         mainPresenter.onStarted()

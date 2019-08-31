@@ -8,6 +8,7 @@ import com.example.note.ui.activity.EditActivity
 import com.example.note.ui.activity.MainActivity
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.security.auth.callback.Callback
 
 class EditPresenter (
     private val editView: EditContract.View,
@@ -54,17 +55,20 @@ class EditPresenter (
         })
     }
 
-    override fun onClickDelete() {
+    override fun onClickDelete(note_id: Int, position: Int) {
 
-        editRepository.delete(object : EditRepository.DeleteListener{
+        editRepository.delete(note_id, object : EditRepository.DeleteListener{
 
             override fun onSuccess() {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                MainActivity.adapter.removeAt(position)
+                editView.showMessageForNoteDelete()
+                editView.finishActivity()
             }
 
             override fun onFail() {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                editView.showMessageForNoteSaveFail()
             }
+
         })
     }
 

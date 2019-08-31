@@ -1,5 +1,6 @@
 package com.example.note.presenter
 
+import android.content.Context
 import com.example.note.contract.MainContract
 import com.example.note.data.local.PrefHelper
 import com.example.note.data.model.Note
@@ -8,10 +9,11 @@ import com.example.note.ui.activity.MainActivity
 
 class MainPresenter (
     private val mainView: MainContract.View,
-    private val mainRepository: MainContract.Repository
+    private val mainRepository: MainContract.Repository,
+    context: Context
 ): MainContract.Presenter{
 
-    val prefHelper = PrefHelper.getInstance(MainActivity())
+    val prefHelper = PrefHelper.getInstance(context)
     val id = prefHelper?.getId()
 
     override fun onStarted() {

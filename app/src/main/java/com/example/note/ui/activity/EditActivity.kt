@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.activity_edit.*
 
 class EditActivity : AppCompatActivity(), EditContract.View{
 
-
     private val editPresenter = EditPresenter(this, EditRepository())
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,20 +41,16 @@ class EditActivity : AppCompatActivity(), EditContract.View{
         }
 
         button_delete.setOnClickListener {
-            editPresenter.onClickDelete()
-//            if(intent.hasExtra("position")){
-//                MainActivity.adapter.removeAt(position)
-//                Toast.makeText(this, "item$position deleted", Toast.LENGTH_SHORT).show()
-//                finish()
-//            } else{
-//                Toast.makeText(this, "there's nothing saved", Toast.LENGTH_LONG).show()
-//            }
+            Toast.makeText(this, "Foo", Toast.LENGTH_SHORT).show()
+            editPresenter.onClickDelete(noteId, position)
         }
     }
 
     override fun showMessageForNewNote() = Toast.makeText(this@EditActivity, "New Note!", Toast.LENGTH_SHORT).show()
 
     override fun showMessageForNoteDelete() = Toast.makeText(this@EditActivity, "Note Deleted", Toast.LENGTH_SHORT).show()
+
+    override fun showMessageForNoteDeleteFail() = Toast.makeText(this@EditActivity, "Delete Fail", Toast.LENGTH_SHORT).show()
 
     override fun showMessageForNoteSave() = Toast.makeText(this@EditActivity, "Note saved", Toast.LENGTH_SHORT).show()
 

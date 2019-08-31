@@ -5,6 +5,7 @@ import android.widget.Toast
 import com.example.note.contract.EditContract
 import com.example.note.data.RetrofitService
 import com.example.note.data.model.Note
+import com.example.note.ui.activity.EditActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,7 +38,7 @@ class EditRepository : EditContract.Repository{
             val call = retrofitService.addNote(title, contents, date, id)
             call.enqueue(object : Callback<Note>{
                 override fun onFailure(call: Call<Note>?, t: Throwable?) {
-                    listener.onFail()
+                    nListener.onFail()
                     Log.d("serverDebug", t?.message)
                 }
 
@@ -53,7 +54,7 @@ class EditRepository : EditContract.Repository{
             val call = retrofitService.modifyNote(title, contents, date, note_id, id)
             call.enqueue(object : Callback<Note>{
                 override fun onFailure(call: Call<Note>?, t: Throwable?) {
-                    nListener.onFail()
+                    listener.onFail()
                     Log.d("serverDebug", t?.message)
                 }
 
@@ -68,8 +69,22 @@ class EditRepository : EditContract.Repository{
         }
     }
 
-    override fun delete(listener: DeleteListener) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun delete(noteId: Int, listener: DeleteListener) {
+        val call = retrofitService.deleteNote(noteId)
+        call.enqueue(object : Callback<Unit>{
+            override fun onFailure(call: Call<Unit>?, t: Throwable?) {
+                listener.onFail()
+            }
+
+            override fun onResponse(call: Call<Unit>?, response: Response<Unit>?) {
+                if (response?.code() == 200){
+                    listener.onSuccess()
+                } else if (response?.code() == 500){
+                    listener.onFail()
+                }
+            }
+
+        })
     }
 
 }
