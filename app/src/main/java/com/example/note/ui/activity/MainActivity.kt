@@ -95,9 +95,8 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         adapter.item = items
     }
 
-    override fun showMessageForDataLoadingFail() {
-        Toast.makeText(this@MainActivity, "Data Loading Failed", Toast.LENGTH_LONG).show()
-    }
+    override fun showMessageForDataLoadingFail(t: Throwable?) =
+        Toast.makeText(this@MainActivity, "Data Loading Failed\n${t?.message}", Toast.LENGTH_LONG).show()
 
     override fun onClick(v: View?) {
         when(v?.id){

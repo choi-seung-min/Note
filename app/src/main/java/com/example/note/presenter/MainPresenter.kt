@@ -21,8 +21,8 @@ class MainPresenter (
             override fun onSuccess(items: ArrayList<Note>?) {
                 mainView.addItems(items)
             }
-            override fun onFail() {
-                mainView.showMessageForDataLoadingFail()
+            override fun onFail(t: Throwable?) {
+                mainView.showMessageForDataLoadingFail(t)
             }
         })
     }

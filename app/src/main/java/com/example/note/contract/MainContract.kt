@@ -7,7 +7,7 @@ interface MainContract{
     interface View{
         fun init()
         fun addItems(items: ArrayList<Note>?)
-        fun showMessageForDataLoadingFail()
+        fun showMessageForDataLoadingFail(t: Throwable?)
     }
 
     interface Presenter{

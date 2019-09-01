@@ -16,7 +16,7 @@ class MainRepository: MainContract.Repository{
 
     interface GetNotesListener{
         fun onSuccess(items: ArrayList<Note>?)
-        fun onFail()
+        fun onFail(t: Throwable?)
     }
 
     override fun getNoteList(id: String?, listener: GetNotesListener) {
@@ -25,14 +25,14 @@ class MainRepository: MainContract.Repository{
         val call = retrofitService.getNotes(id)
         call.enqueue(object : Callback<ArrayList<Note>>{
             override fun onFailure(call: Call<ArrayList<Note>>?, t: Throwable?) {
-                listener.onFail()
+                listener.onFail(t)
             }
 
             override fun onResponse(call: Call<ArrayList<Note>>?, response: Response<ArrayList<Note>>?) {
                 if (response?.code() == 200){
                     listener.onSuccess(response.body())
                 } else if(response?.code() == 500){
-                    listener.onFail()
+                    listener.onFail(null)
                 }
             }
         })
