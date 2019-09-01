@@ -20,17 +20,17 @@ class EditRepository : EditContract.Repository{
 
     interface NewSaveListener{
         fun onSuccess(note: Note)
-        fun onFail(t: Throwable?)
+        fun onFail(msg: String?)
     }
 
     interface SaveListener{
         fun onSuccess(note: Note)
-        fun onFail(t: Throwable?)
+        fun onFail(msg: String?)
     }
 
     interface DeleteListener{
         fun onSuccess()
-        fun onFail(t: Throwable?)
+        fun onFail(msg: String?)
     }
 
     override fun save(title: String, contents: String, date: String, id: String?, note_id: Int, flag: Boolean,  listener: SaveListener, nListener: NewSaveListener) {
@@ -38,14 +38,14 @@ class EditRepository : EditContract.Repository{
             val call = retrofitService.addNote(title, contents, date, id)
             call.enqueue(object : Callback<Note>{
                 override fun onFailure(call: Call<Note>?, t: Throwable?) {
-                    nListener.onFail(t)
+                    nListener.onFail(t?.message)
                 }
 
                 override fun onResponse(call: Call<Note>?, response: Response<Note>?) {
                     if (response?.code() == 200){
                         nListener.onSuccess(response.body())
                     } else if(response?.code() == 500){
-                        nListener.onFail(null)
+                        nListener.onFail("server error")
                     }
                 }
             })
@@ -53,14 +53,14 @@ class EditRepository : EditContract.Repository{
             val call = retrofitService.modifyNote(title, contents, date, note_id, id)
             call.enqueue(object : Callback<Note>{
                 override fun onFailure(call: Call<Note>?, t: Throwable?) {
-                    listener.onFail(t)
+                    listener.onFail(t?.message)
                 }
 
                 override fun onResponse(call: Call<Note>?, response: Response<Note>?) {
                     if (response?.code() == 200){
                         listener.onSuccess(response.body())
                     } else if(response?.code() == 500){
-                        listener.onFail(null)
+                        listener.onFail("server error")
                     }
                 }
             })
@@ -71,14 +71,14 @@ class EditRepository : EditContract.Repository{
         val call = retrofitService.deleteNote(noteId)
         call.enqueue(object : Callback<Unit>{
             override fun onFailure(call: Call<Unit>?, t: Throwable?) {
-                listener.onFail(t)
+                listener.onFail(t?.message)
             }
 
             override fun onResponse(call: Call<Unit>?, response: Response<Unit>?) {
                 if (response?.code() == 200){
                     listener.onSuccess()
                 } else if (response?.code() == 500){
-                    listener.onFail(null)
+                    listener.onFail("server error")
                 }
             }
 

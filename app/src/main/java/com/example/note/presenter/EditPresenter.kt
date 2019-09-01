@@ -38,8 +38,8 @@ class EditPresenter (
                 editView.finishActivity()
             }
 
-            override fun onFail(t: Throwable?) {
-                editView.showMessageForNoteSaveFail(t)
+            override fun onFail(msg: String?) {
+                editView.showMessageForNoteSaveFail(msg)
             }
         }, object : EditRepository.NewSaveListener{
             override fun onSuccess(note: Note) {
@@ -48,8 +48,8 @@ class EditPresenter (
                 editView.showMessageForNoteSave()
                 editView.finishActivity()
             }
-            override fun onFail(t: Throwable?) {
-                editView.showMessageForNoteSaveFail(t)
+            override fun onFail(msg: String?) {
+                editView.showMessageForNoteSaveFail(msg)
             }
 
         })
@@ -65,8 +65,8 @@ class EditPresenter (
                 editView.finishActivity()
             }
 
-            override fun onFail(t: Throwable?) {
-                editView.showMessageForNoteSaveFail(t)
+            override fun onFail(msg: String?) {
+                editView.showMessageForNoteSaveFail(msg)
             }
 
         })

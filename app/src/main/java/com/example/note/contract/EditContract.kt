@@ -6,9 +6,9 @@ interface EditContract{
     interface View{
         fun showMessageForNewNote()
         fun showMessageForNoteDelete()
-        fun showMessageForNoteDeleteFail(t: Throwable?)
+        fun showMessageForNoteDeleteFail(msg: String?)
         fun showMessageForNoteSave()
-        fun showMessageForNoteSaveFail(t: Throwable?)
+        fun showMessageForNoteSaveFail(msg: String?)
         fun getNoteTitle() : String
         fun getNoteContent() : String
         fun finishActivity()
