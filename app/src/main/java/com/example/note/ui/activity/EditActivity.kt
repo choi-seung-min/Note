@@ -50,11 +50,11 @@ class EditActivity : AppCompatActivity(), EditContract.View{
 
     override fun showMessageForNoteDelete() = Toast.makeText(this@EditActivity, "Note Deleted", Toast.LENGTH_SHORT).show()
 
-    override fun showMessageForNoteDeleteFail() = Toast.makeText(this@EditActivity, "Delete Fail", Toast.LENGTH_SHORT).show()
+    override fun showMessageForNoteDeleteFail(t: Throwable?) = Toast.makeText(this@EditActivity, "Delete Fail\n${t?.message}", Toast.LENGTH_SHORT).show()
 
     override fun showMessageForNoteSave() = Toast.makeText(this@EditActivity, "Note saved", Toast.LENGTH_SHORT).show()
 
-    override fun showMessageForNoteSaveFail() = Toast.makeText(this@EditActivity, "Note not saved", Toast.LENGTH_SHORT).show()
+    override fun showMessageForNoteSaveFail(t: Throwable?) = Toast.makeText(this@EditActivity, "Note not saved\n${t?.message}", Toast.LENGTH_SHORT).show()
 
     override fun getNoteTitle(): String = edit_title.text.toString()
 
