@@ -25,8 +25,8 @@ class SignupActivity : AppCompatActivity(), SignupContract.View{
 
     override fun showMessageForSignupSuccess() = Toast.makeText(this@SignupActivity, "Signup Success", Toast.LENGTH_LONG).show()
 
-    override fun showMessageForSignupFail(t: Throwable?) =
-        Toast.makeText(this@SignupActivity, "Signup Failed\n${t?.message}", Toast.LENGTH_LONG).show()
+    override fun showMessageForSignupFail(msg: String?) =
+        Toast.makeText(this@SignupActivity, "Signup Failed\n${msg}", Toast.LENGTH_LONG).show()
 
     override fun getName(): String = signup_et_name.text.toString()
 

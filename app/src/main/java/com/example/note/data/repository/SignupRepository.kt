@@ -14,7 +14,7 @@ class SignupRepository : SignupContract.Repository{
 
     interface SignupListener{
         fun onSuccess()
-        fun onFail(t: Throwable?)
+        fun onFail(msg: String?)
     }
 
     override fun Signup(name: String, id: String, password: String, listener: SignupListener) {
@@ -23,14 +23,14 @@ class SignupRepository : SignupContract.Repository{
         val call = retrofitService.signUp(name, id, password)
         call.enqueue(object : Callback<Unit>{
             override fun onFailure(call: Call<Unit>?, t: Throwable?) {
-                listener.onFail(t)
+                listener.onFail(t?.message)
             }
 
             override fun onResponse(call: Call<Unit>?, response: Response<Unit>?) {
                 if(response?.code() == 200){
                     listener.onSuccess()
                 } else if(response?.code() == 409){
-                    listener.onFail(null)
+                    listener.onFail("account already exist")
                 }
             }
         })
