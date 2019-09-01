@@ -1,11 +1,8 @@
 package com.example.note.data.repository
 
-import android.util.Log
-import android.widget.Toast
 import com.example.note.contract.EditContract
 import com.example.note.data.RetrofitService
 import com.example.note.data.model.Note
-import com.example.note.ui.activity.EditActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

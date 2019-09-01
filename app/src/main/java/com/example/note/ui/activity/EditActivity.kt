@@ -29,15 +29,18 @@ class EditActivity : AppCompatActivity(), EditContract.View{
             editPresenter.flag = false
             edit_title.setText(data?.get(position)?.title)
             edit_contents.setText(data?.get(position)?.content)
+            edit_contents.requestFocus()
             imm.showSoftInput(edit_contents, 0)
+            //not working when activity is started
         } else{
             Toast.makeText(this, "New Note", Toast.LENGTH_SHORT).show()
             editPresenter.flag = true
+            edit_title.requestFocus()
             imm.showSoftInput(edit_title, 0)
+            //not working when activity is started
         }
 
         button_save.setOnClickListener {
-            //TODO: null check title and contents
             editPresenter.onClickSave(noteId, position)
         }
 
@@ -47,6 +50,27 @@ class EditActivity : AppCompatActivity(), EditContract.View{
     }
 
     override fun showMessageForNewNote() = Toast.makeText(this@EditActivity, "New Note!", Toast.LENGTH_SHORT).show()
+
+    override fun showMessageForEmptyNote() {
+        Toast.makeText(this@EditActivity, "note title and contents is empty", Toast.LENGTH_LONG).show()
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        edit_title.requestFocus()
+        imm.showSoftInput(edit_title, 0)
+    }
+
+    override fun showMessageForEmptyTitle() {
+        Toast.makeText(this@EditActivity, "note title is empty", Toast.LENGTH_LONG).show()
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        edit_title.requestFocus()
+        imm.showSoftInput(edit_title, 0)
+    }
+
+    override fun showMessageForEmptyContent() {
+        Toast.makeText(this@EditActivity, "note contents is empty", Toast.LENGTH_LONG).show()
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        edit_contents.requestFocus()
+        imm.showSoftInput(edit_contents, 0)
+    }
 
     override fun showMessageForNoteDelete() = Toast.makeText(this@EditActivity, "Note Deleted", Toast.LENGTH_SHORT).show()
 

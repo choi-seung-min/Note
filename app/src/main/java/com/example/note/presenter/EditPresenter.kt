@@ -29,30 +29,38 @@ class EditPresenter (
         val prefHelper = PrefHelper.getInstance(EditActivity())
         val id = prefHelper?.getId()
 
-        editRepository.save(title, contents, strDate, id, note_id, flag, object : EditRepository.SaveListener{
+        if(title.isEmpty() && contents.isEmpty()){
+            editView.showMessageForEmptyNote()
+        } else if(title.isEmpty()){
+            editView.showMessageForEmptyTitle()
+        } else if (contents.isEmpty()){
+            editView.showMessageForEmptyContent()
+        } else{
+            editRepository.save(title, contents, strDate, id, note_id, flag, object : EditRepository.SaveListener{
 
-            override fun onSuccess(note: Note) {
-                MainActivity.adapter.item?.set(position, note)
-                MainActivity.adapter.notifyDataSetChanged()
-                editView.showMessageForNoteSave()
-                editView.finishActivity()
-            }
+                override fun onSuccess(note: Note) {
+                    MainActivity.adapter.item?.set(position, note)
+                    MainActivity.adapter.notifyDataSetChanged()
+                    editView.showMessageForNoteSave()
+                    editView.finishActivity()
+                }
 
-            override fun onFail(msg: String?) {
-                editView.showMessageForNoteSaveFail(msg)
-            }
-        }, object : EditRepository.NewSaveListener{
-            override fun onSuccess(note: Note) {
-                MainActivity.adapter.item!!.add(note)
-                MainActivity.adapter.notifyItemInserted(MainActivity.adapter.itemCount+1)
-                editView.showMessageForNoteSave()
-                editView.finishActivity()
-            }
-            override fun onFail(msg: String?) {
-                editView.showMessageForNoteSaveFail(msg)
-            }
+                override fun onFail(msg: String?) {
+                    editView.showMessageForNoteSaveFail(msg)
+                }
+            }, object : EditRepository.NewSaveListener{
+                override fun onSuccess(note: Note) {
+                    MainActivity.adapter.item!!.add(note)
+                    MainActivity.adapter.notifyItemInserted(MainActivity.adapter.itemCount+1)
+                    editView.showMessageForNoteSave()
+                    editView.finishActivity()
+                }
+                override fun onFail(msg: String?) {
+                    editView.showMessageForNoteSaveFail(msg)
+                }
 
-        })
+            })
+        }
     }
 
     override fun onClickDelete(note_id: Int, position: Int) {

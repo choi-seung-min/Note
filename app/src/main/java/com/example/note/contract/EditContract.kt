@@ -5,6 +5,9 @@ import com.example.note.data.repository.EditRepository
 interface EditContract{
     interface View{
         fun showMessageForNewNote()
+        fun showMessageForEmptyNote()
+        fun showMessageForEmptyTitle()
+        fun showMessageForEmptyContent()
         fun showMessageForNoteDelete()
         fun showMessageForNoteDeleteFail(msg: String?)
         fun showMessageForNoteSave()
