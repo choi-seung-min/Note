@@ -13,7 +13,7 @@ class MainPresenter (
     context: Context
 ): MainContract.Presenter{
 
-    val prefHelper = PrefHelper.getInstance(context)
+    private val prefHelper = PrefHelper.getInstance(context)
     val id = prefHelper?.getId()
 
     override fun onStarted() {

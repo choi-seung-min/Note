@@ -21,10 +21,9 @@ class EditPresenter (
     override fun onClickSave(note_id: Int, position: Int) {
         val title = editView.getNoteTitle()
         val contents = editView.getNoteContent()
-        val dateFormat = SimpleDateFormat("yyyy-mm-dd-ss")
-        val date = GregorianCalendar(Locale.KOREA)
-        date.time = Date()
-        val strDate = dateFormat.format(date.time)
+        val dateFormat = SimpleDateFormat("yyyy.MM.dd hh:mm:ss a", Locale.KOREA)
+        val date = Date()
+        val strDate = dateFormat.format(date)
 
         val prefHelper = PrefHelper.getInstance(EditActivity())
         val id = prefHelper?.getId()

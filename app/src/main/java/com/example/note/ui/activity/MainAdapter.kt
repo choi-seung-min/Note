@@ -57,6 +57,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.SampleViewHolder>() {
                 val intent = Intent(it?.context, EditActivity::class.java)
                 intent.putExtra("position", position)
                 intent.putExtra("note_id", item?.get(position)?.note_id)
+                intent.putExtra("date", item?.get(position)?.last_changed_date)
                 it?.context?.startActivity(intent)
                 Toast.makeText(it?.context, "clicked ${position+1} item", Toast.LENGTH_LONG).show()
             }

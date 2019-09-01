@@ -23,12 +23,14 @@ class EditActivity : AppCompatActivity(), EditContract.View{
         val data: ArrayList<Note>? = MainActivity.adapter.item
         val position: Int = intent.getIntExtra("position", 0)
         val noteId : Int = intent.getIntExtra("note_id", 0)
+        val date : String = intent.getStringExtra("date")
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
         if(intent.hasExtra("note_id")){
             editPresenter.flag = false
             edit_title.setText(data?.get(position)?.title)
             edit_contents.setText(data?.get(position)?.content)
+            show_date.text = date
             edit_contents.requestFocus()
             imm.showSoftInput(edit_contents, 0)
             //not working when activity is started
