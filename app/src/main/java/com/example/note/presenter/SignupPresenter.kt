@@ -19,8 +19,8 @@ class SignupPresenter (
                 signupActivity.finish()
             }
 
-            override fun onFail() {
-                signupActivity.showMessageForSignupFail()
+            override fun onFail(t: Throwable?) {
+                signupActivity.showMessageForSignupFail(t)
                 signupActivity.finish()
             }
         })

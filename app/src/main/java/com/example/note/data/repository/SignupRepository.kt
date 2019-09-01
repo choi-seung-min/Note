@@ -1,6 +1,5 @@
 package com.example.note.data.repository
 
-import android.widget.Toast
 import com.example.note.contract.SignupContract
 import com.example.note.data.RetrofitService
 import retrofit2.Call
@@ -15,7 +14,7 @@ class SignupRepository : SignupContract.Repository{
 
     interface SignupListener{
         fun onSuccess()
-        fun onFail()
+        fun onFail(t: Throwable?)
     }
 
     override fun Signup(name: String, id: String, password: String, listener: SignupListener) {
@@ -24,11 +23,15 @@ class SignupRepository : SignupContract.Repository{
         val call = retrofitService.signUp(name, id, password)
         call.enqueue(object : Callback<Unit>{
             override fun onFailure(call: Call<Unit>?, t: Throwable?) {
-                listener.onFail()
+                listener.onFail(t)
             }
 
             override fun onResponse(call: Call<Unit>?, response: Response<Unit>?) {
-                listener.onSuccess()
+                if(response?.code() == 200){
+                    listener.onSuccess()
+                } else if(response?.code() == 409){
+                    listener.onFail(null)
+                }
             }
         })
     }

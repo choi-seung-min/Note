@@ -36,7 +36,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     override fun showMessageForLoginSuccess() = Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
 
-    override fun showMessageForLoginFail(t: Throwable?) = Toast.makeText(this, "로그인 실패\n${t?.message}", Toast.LENGTH_SHORT).show()
+    override fun showMessageForLoginFail(msg: String?) = Toast.makeText(this, "로그인 실패\n${msg}", Toast.LENGTH_SHORT).show()
 
     override fun clearInputForLoginFail() {
         id.setText("")

@@ -5,7 +5,7 @@ import com.example.note.data.repository.SignupRepository
 interface SignupContract {
     interface View{
         fun showMessageForSignupSuccess()
-        fun showMessageForSignupFail()
+        fun showMessageForSignupFail(t: Throwable?)
         fun getName() : String
         fun getId() : String
         fun getPassword() : String
